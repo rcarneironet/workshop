@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Application",
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Contoso.Store.SQLProject", "Contoso.Store.SQLProject\Contoso.Store.SQLProject.sqlproj", "{BA65846A-0EC2-42B2-8F7F-B0F56CF7041E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.API", "Contoso.Store.API\Contoso.Store.API.csproj", "{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{BA65846A-0EC2-42B2-8F7F-B0F56CF7041E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA65846A-0EC2-42B2-8F7F-B0F56CF7041E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA65846A-0EC2-42B2-8F7F-B0F56CF7041E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{DF322121-D04F-4DA0-882D-E8AB60121AB4} = {8CD42BCA-BFFB-4424-BF4A-F75B60383C0B}
 		{D5B54CD8-F910-4953-A397-13D946598EC7} = {F3789A8D-5FBF-4A5F-A0A0-8D03E9AAF5A7}
 		{BA65846A-0EC2-42B2-8F7F-B0F56CF7041E} = {8CD42BCA-BFFB-4424-BF4A-F75B60383C0B}
+		{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF} = {C6068B94-676B-4103-B7A7-E510DFD777DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51AFFFBB-7241-4600-9072-EE53B8B5D109}
