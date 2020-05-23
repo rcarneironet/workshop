@@ -3,7 +3,6 @@ using Contoso.Store.Shared.BaseEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 
 namespace Contoso.Store.Domain.Contexts.Entities
 {

@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{7971DA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{981802E1-3F47-4B71-95EF-6DA179762881}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Domain", "Contoso.Store.Domain\Contoso.Store.Domain.csproj", "{6A143FEA-CE72-499E-8335-A515EE557A90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Domain", "Contoso.Store.Domain\Contoso.Store.Domain.csproj", "{6A143FEA-CE72-499E-8335-A515EE557A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Shared", "Contoso.Store.Shared\Contoso.Store.Shared.csproj", "{129CD446-075C-4EFC-8B01-DA04D6E3C165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Shared", "Contoso.Store.Shared\Contoso.Store.Shared.csproj", "{129CD446-075C-4EFC-8B01-DA04D6E3C165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Tests", "Contoso.Store.Tests\Contoso.Store.Tests.csproj", "{829DD02D-7EDA-492C-8291-1F741C7C6F82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{129CD446-075C-4EFC-8B01-DA04D6E3C165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{129CD446-075C-4EFC-8B01-DA04D6E3C165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{129CD446-075C-4EFC-8B01-DA04D6E3C165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829DD02D-7EDA-492C-8291-1F741C7C6F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829DD02D-7EDA-492C-8291-1F741C7C6F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829DD02D-7EDA-492C-8291-1F741C7C6F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829DD02D-7EDA-492C-8291-1F741C7C6F82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6A143FEA-CE72-499E-8335-A515EE557A90} = {10688D31-8268-4AB8-B742-BEB9701B70F3}
 		{129CD446-075C-4EFC-8B01-DA04D6E3C165} = {7971DA02-E2D4-406E-84B4-232800522E96}
+		{829DD02D-7EDA-492C-8291-1F741C7C6F82} = {981802E1-3F47-4B71-95EF-6DA179762881}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51AFFFBB-7241-4600-9072-EE53B8B5D109}
