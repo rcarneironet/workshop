@@ -18,20 +18,13 @@ namespace Contoso.Store.Domain.Contexts.Entities
         public IReadOnlyCollection<OrderItem> Itens => _itens.ToArray();
         public IReadOnlyCollection<Delivery> Deliveries => _deliveries.ToArray();
 
-        public Order(
-            IList<OrderItem> itens,
-            IList<Delivery> deliveries,
-            Customer customer,
-            string number,
-            DateTime creationDate,
-            EOrderStatus status)
+        public Order(Customer customer)
         {
-            _itens = itens;
-            _deliveries = deliveries;
             Customer = customer;
-            Number = number;
-            CreationDate = creationDate;
-            Status = status;
+            CreationDate = DateTime.Now;
+            Status = EOrderStatus.Created;
+            _itens = new List<OrderItem>();
+            _deliveries = new List<Delivery>();
         }
 
         //adiciona item
@@ -61,7 +54,7 @@ namespace Contoso.Store.Domain.Contexts.Entities
         }
 
         //Enviar
-        public void Enviar()
+        public void Ship()
         {
             var deliveries = new List<Delivery>();
             var count = 1;
