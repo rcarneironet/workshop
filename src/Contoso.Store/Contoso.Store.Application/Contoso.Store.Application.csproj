@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Repositories\MongoDb\" />
+    <PackageReference Include="FluentValidator" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
