@@ -6,12 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Contoso.Store.Application\Contoso.Store.Application.csproj" />
     <ProjectReference Include="..\Contoso.Store.Shared\Contoso.Store.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IoC\Domain\" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Contoso.Store.Infrastructure.IoC;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Contoso.Store.API
 {
@@ -26,12 +29,25 @@ namespace Contoso.Store.API
                 Title = "API Workshop Academia"
             }));
 
+            /*
+             * Transient -> um novo objeto é sempre criado, uma nova instância é sempre provida para cada request/serviço
+             * Scoped -> Um mesmo objeto dentro de um request, mas diferente entre multiplos requests
+             * Singleton (padrão de projeto) -> Os objetos ficam na memoria enquanto o sistema estiver no ar
+             */
+
+            RegisterServices(services);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            new RootBootstrapper().BootStrapperRegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
+            IApplicationBuilder app,
             IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -43,6 +59,9 @@ namespace Contoso.Store.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //Habilitar o Cors
+            app.UseCors();
 
             app.UseSwagger();
             app.UseSwaggerUI(s =>
