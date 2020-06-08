@@ -12,6 +12,7 @@ namespace Contoso.Store.API.Controllers
     {
         // GET api/values
         [HttpGet]
+        [ResponseCache(Duration = 30)] //cache
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
