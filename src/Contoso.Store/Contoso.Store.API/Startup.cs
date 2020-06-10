@@ -1,10 +1,15 @@
 ﻿using Contoso.Store.Infrastructure.IoC;
+using Contoso.Store.Shared.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace Contoso.Store.API
 {
@@ -24,6 +29,7 @@ namespace Contoso.Store.API
             services.AddControllers();
             services.AddOptions();
 
+            //Cors
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -33,6 +39,7 @@ namespace Contoso.Store.API
                     .AllowCredentials());
             });
 
+            //Swagger
             services.AddSwaggerGen(s =>
             s.SwaggerDoc("v1",
             new OpenApiInfo
@@ -41,6 +48,35 @@ namespace Contoso.Store.API
                 Title = "API Workshop Academia",
                 Description = "API do Contoso Store"
             }));
+
+            //Autenticação            
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+
+            services.AddAuthentication(authOptions =>
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                //TO-DO: configurar de acordo cmop seu projeto
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = string.Empty,
+                    ValidAudience = string.Empty,
+                    IssuerSigningKey = signingConfigurations.Key,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
 
             /*
              * Transient -> um novo objeto é sempre criado, uma nova instância é sempre provida para cada request/serviço
@@ -65,6 +101,7 @@ namespace Contoso.Store.API
             }
 
             app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

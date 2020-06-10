@@ -1,10 +1,12 @@
 ﻿using Contoso.Store.Application.Handlers.CustomerHandlers;
 using Contoso.Store.Domain.Contexts.Commands.Customer;
 using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Contoso.Store.API.Controllers
 {
+    [Authorize("Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : Controller
@@ -22,6 +24,7 @@ namespace Contoso.Store.API.Controllers
         [HttpPost("create")]
         [ProducesResponseType(typeof(string), 201)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public IActionResult Post([FromBody] CreateCustomerCommand command)
         {
@@ -31,6 +34,7 @@ namespace Contoso.Store.API.Controllers
         [HttpPut("update")]
         [ProducesResponseType(typeof(string), 204)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public IActionResult Put([FromBody] ChangeCustomerCommand command)
         {
@@ -40,6 +44,7 @@ namespace Contoso.Store.API.Controllers
         [HttpPost("getByDocument")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public IActionResult Get(CustomerDocumentQuery query)
         {
@@ -49,6 +54,7 @@ namespace Contoso.Store.API.Controllers
         [HttpGet("getAllCustomers")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public IActionResult Get()
         {

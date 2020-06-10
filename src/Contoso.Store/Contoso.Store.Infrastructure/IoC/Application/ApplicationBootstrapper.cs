@@ -1,4 +1,5 @@
 ﻿using Contoso.Store.Application.Handlers.CustomerHandlers;
+using Contoso.Store.Application.Handlers.Login;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contoso.Store.Infrastructure.IoC.Application
@@ -9,6 +10,7 @@ namespace Contoso.Store.Infrastructure.IoC.Application
         {
             services.AddTransient<CustomerCommandHandler, CustomerCommandHandler>();
             services.AddTransient<CustomerQueryHandler, CustomerQueryHandler>();
+            services.AddTransient<LoginQueryHandler, LoginQueryHandler>();
         }
     }
 }
