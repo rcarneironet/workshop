@@ -38,5 +38,17 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
                 throw new Exception("Erro - Handler CustomerHandler" + ex.Message);
             }
         }
+
+        public IResult Handle()
+        {
+            try
+            {
+                return new ApiContract(true, string.Empty, _repository.AllCustomersQuery());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro - Handler CustomerHandler" + ex.Message);
+            }
+        }
     }
 }

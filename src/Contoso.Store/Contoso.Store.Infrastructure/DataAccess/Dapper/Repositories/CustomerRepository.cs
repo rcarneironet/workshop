@@ -4,6 +4,7 @@ using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
 using Contoso.Store.Infrastructure.DataAccess.Dapper.Context;
 using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Contoso.Store.Infrastructure.DataAccess.Dapper.Repositories
@@ -15,6 +16,12 @@ namespace Contoso.Store.Infrastructure.DataAccess.Dapper.Repositories
         {
             _context = context;
         }
+
+        public IEnumerable<AllCustomersQuery> AllCustomersQuery() =>
+                _context
+                .Connection
+                .Query<AllCustomersQuery>("SELECT Nome, Documento, Email, Telefone FROM [dbo].[Cliente]");
+
         public CustomerDocumentQuery GetByDocument(string cpf) => _context
                 .Connection
                 .Query<CustomerDocumentQuery>(

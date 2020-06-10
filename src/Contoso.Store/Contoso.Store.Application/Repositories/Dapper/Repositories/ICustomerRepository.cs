@@ -9,5 +9,6 @@ namespace Contoso.Store.Application.Repositories.Dapper.Repositories
     {
         void Save(Customer model, Guid? id);
         CustomerDocumentQuery GetByDocument(string cpf);
+        IEnumerable<AllCustomersQuery> AllCustomersQuery();
     }
 }

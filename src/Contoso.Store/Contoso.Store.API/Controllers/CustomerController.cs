@@ -45,5 +45,14 @@ namespace Contoso.Store.API.Controllers
         {
             return StatusCode(200, _queryHandler.Handle(query));
         }
+
+        [HttpGet("getAllCustomers")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult Get()
+        {
+            return StatusCode(200, _queryHandler.Handle());
+        }
     }
 }
