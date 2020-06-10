@@ -15,10 +15,10 @@ namespace Contoso.Store.Infrastructure.DataAccess.Dapper.Repositories
         {
             _context = context;
         }
-        public GetCustomerQueryResult GetByCpf(string cpf) => _context
+        public CustomerDocumentQuery GetByDocument(string cpf) => _context
                 .Connection
-                .Query<GetCustomerQueryResult>(
-                 @"SELECT Nome, Documento FROM [dbo].[Cliente] Where Documento = @Cpf",
+                .Query<CustomerDocumentQuery>(
+                 @"SELECT Documento FROM [dbo].[Cliente] Where Documento = @Cpf",
                  param: new { Cpf = cpf })
                 .FirstOrDefault();
 

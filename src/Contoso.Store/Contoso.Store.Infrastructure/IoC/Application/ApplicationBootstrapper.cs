@@ -1,4 +1,4 @@
-﻿using Contoso.Store.Application.Handlers.CustomerHandler;
+﻿using Contoso.Store.Application.Handlers.CustomerHandlers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contoso.Store.Infrastructure.IoC.Application
@@ -7,7 +7,8 @@ namespace Contoso.Store.Infrastructure.IoC.Application
     {
         internal void ChildServiceRegister(IServiceCollection services)
         {
-            services.AddTransient<CustomerHandler, CustomerHandler>();
+            services.AddTransient<CustomerCommandHandler, CustomerCommandHandler>();
+            services.AddTransient<CustomerQueryHandler, CustomerQueryHandler>();
         }
     }
 }

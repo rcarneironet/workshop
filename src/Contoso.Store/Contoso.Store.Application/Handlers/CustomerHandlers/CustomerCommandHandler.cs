@@ -7,19 +7,19 @@ using Contoso.Store.Shared.Implementations;
 using FluentValidator;
 using System;
 
-namespace Contoso.Store.Application.Handlers.CustomerHandler
+namespace Contoso.Store.Application.Handlers.CustomerHandlers
 {
-    public class CustomerHandler :
+    public class CustomerCommandHandler :
         Notifiable,
         ICommandHandler<CreateCustomerCommand>,
         ICommandHandler<ChangeCustomerCommand>
     {
         private readonly ICustomerRepository _repository;
-        public CustomerHandler(ICustomerRepository repository)
+        public CustomerCommandHandler(ICustomerRepository repository)
         {
             _repository = repository;
         }
-        public ICommandResult Handle(CreateCustomerCommand command)
+        public IResult Handle(CreateCustomerCommand command)
         {
             //Criar ValueObjects
             var name = new NameVo(command.Nome, command.Sobrenome);
@@ -35,7 +35,7 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
 
             if (Invalid)
             {
-                return new CommandResult(false,
+                return new ApiContract(false,
                     "Erro, corrija os seguintes problemas:",
                     Notifications);
             }
@@ -50,10 +50,10 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
                 throw new Exception("Erro - Handler CustomerHandler" + ex.InnerException);
             }
 
-            return new CommandResult(true, "Customer criado com sucesso", null);
+            return new ApiContract(true, "Customer criado com sucesso", null);
         }
 
-        public ICommandResult Handle(ChangeCustomerCommand command)
+        public IResult Handle(ChangeCustomerCommand command)
         {
             //Criar ValueObjects
             var name = new NameVo(command.Nome, command.Sobrenome);
@@ -69,7 +69,7 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
 
             if (Invalid)
             {
-                return new CommandResult(false,
+                return new ApiContract(false,
                     "Erro, corrija os seguintes problemas:",
                     Notifications);
             }
@@ -84,7 +84,7 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
                 throw new Exception("Erro - Handler CustomerHandler" + ex.Message);
             }
 
-            return new CommandResult(true, "Customer criado com sucesso", null);
+            return new ApiContract(true, "Customer criado com sucesso", null);
         }
 
     }

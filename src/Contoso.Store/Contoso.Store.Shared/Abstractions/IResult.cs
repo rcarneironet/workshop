@@ -1,6 +1,6 @@
 ﻿namespace Contoso.Store.Shared.Abstractions
 {
-    public interface ICommandResult
+    public interface IResult
     {
         bool Success { get; set; }
         string Message { get; set; }

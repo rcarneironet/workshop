@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{10688D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{8CD42BCA-BFFB-4424-BF4A-F75B60383C0B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{7971DA02-E2D4-406E-84B4-232800522E96}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCore", "SharedCore", "{7971DA02-E2D4-406E-84B4-232800522E96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{981802E1-3F47-4B71-95EF-6DA179762881}"
 EndProject
@@ -19,15 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Domain", "Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Shared", "Contoso.Store.Shared\Contoso.Store.Shared.csproj", "{129CD446-075C-4EFC-8B01-DA04D6E3C165}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Tests", "Contoso.Store.Tests\Contoso.Store.Tests.csproj", "{829DD02D-7EDA-492C-8291-1F741C7C6F82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Tests", "Contoso.Store.Tests\Contoso.Store.Tests.csproj", "{829DD02D-7EDA-492C-8291-1F741C7C6F82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Infrastructure", "Contoso.Store.Infrastructure\Contoso.Store.Infrastructure.csproj", "{DF322121-D04F-4DA0-882D-E8AB60121AB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Infrastructure", "Contoso.Store.Infrastructure\Contoso.Store.Infrastructure.csproj", "{DF322121-D04F-4DA0-882D-E8AB60121AB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.Application", "Contoso.Store.Application\Contoso.Store.Application.csproj", "{D5B54CD8-F910-4953-A397-13D946598EC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.Application", "Contoso.Store.Application\Contoso.Store.Application.csproj", "{D5B54CD8-F910-4953-A397-13D946598EC7}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Contoso.Store.SQLProject", "Contoso.Store.SQLProject\Contoso.Store.SQLProject.sqlproj", "{BA65846A-0EC2-42B2-8F7F-B0F56CF7041E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Store.API", "Contoso.Store.API\Contoso.Store.API.csproj", "{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Store.API", "Contoso.Store.API\Contoso.Store.API.csproj", "{F6BA7B97-4BE6-4778-8E73-5D7E3F11E7CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

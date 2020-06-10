@@ -4,4 +4,9 @@
     {
         bool IsValid();
     }
+
+    public interface IQuery
+    {
+        bool IsValid();
+    }
 }
