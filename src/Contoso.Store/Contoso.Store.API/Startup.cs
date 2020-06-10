@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Text;
 
 namespace Contoso.Store.API
 {
@@ -40,8 +41,7 @@ namespace Contoso.Store.API
             });
 
             //Swagger
-            services.AddSwaggerGen(s =>
-            s.SwaggerDoc("v1",
+            services.AddSwaggerGen(s => s.SwaggerDoc("v1",
             new OpenApiInfo
             {
                 Version = "1.0",
@@ -49,25 +49,28 @@ namespace Contoso.Store.API
                 Description = "API do Contoso Store"
             }));
 
-            //Autenticação            
+            // JWT Setup
+            //TO-DO: Change key with a secret and change valid audience
+
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
 
-            services.AddAuthentication(authOptions =>
+            var key = Encoding.ASCII.GetBytes("Trustn01");
+            services.AddAuthentication(x =>
             {
-                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
             {
-                //TO-DO: configurar de acordo cmop seu projeto
-                options.TokenValidationParameters = new TokenValidationParameters()
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = string.Empty,
-                    ValidAudience = string.Empty,
-                    IssuerSigningKey = signingConfigurations.Key,
                     ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false, //mude se precisar
+                    ValidateAudience = false, //mude se precisar
+                    ValidAudience = "localhost:5001"
                 };
             });
 
@@ -100,19 +103,29 @@ namespace Contoso.Store.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
+
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
+
             app.UseAuthorization();
+            //app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.UseCors("CorsPolicy");
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Observabilidade");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contoso API");
             });
         }
     }

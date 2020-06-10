@@ -18,9 +18,8 @@ namespace Contoso.Store.Application.Handlers.Login
     {
 
         //Essas configs podem ser configuradas em settings do projeto
-        private readonly int tokenSeconds = 60;
-        private readonly string tokenIssuer = "";
-        private readonly string tokenAudience = "";
+        private readonly string tokenIssuer = "localhost";
+        private readonly string tokenAudience = "localhost";
         private readonly SigningConfigurations _signingConfigurations;
         public LoginQueryHandler([FromServices] SigningConfigurations signingConfigurations)
         {
@@ -62,7 +61,7 @@ namespace Contoso.Store.Application.Handlers.Login
                     });
 
                 var dateCreated = DateTime.Now;
-                var dateExpiration = dateCreated + TimeSpan.FromSeconds(tokenSeconds);
+                var dateExpiration = dateCreated.AddDays(1);
 
                 var handler = new JwtSecurityTokenHandler();
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor
