@@ -5,8 +5,9 @@ using System;
 
 namespace Contoso.Store.Domain.Contexts.Commands.Customer
 {
-    public class CreateCustomerCommand : Notifiable, ICommand
+    public class ChangeCustomerCommand : Notifiable, ICommand
     {
+        public Guid? Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Documento { get; set; }

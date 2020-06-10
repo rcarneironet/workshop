@@ -1,4 +1,6 @@
-﻿namespace Contoso.Store.Shared.Abstractions
+﻿using System;
+
+namespace Contoso.Store.Shared.Abstractions
 {
     public interface ICommandHandler<T> where T : ICommand
     {

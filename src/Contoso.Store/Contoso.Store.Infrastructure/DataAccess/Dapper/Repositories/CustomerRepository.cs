@@ -3,6 +3,7 @@ using Contoso.Store.Domain.Contexts.Entities;
 using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
 using Contoso.Store.Infrastructure.DataAccess.Dapper.Context;
 using Dapper;
+using System;
 using System.Linq;
 
 namespace Contoso.Store.Infrastructure.DataAccess.Dapper.Repositories
@@ -21,13 +22,13 @@ namespace Contoso.Store.Infrastructure.DataAccess.Dapper.Repositories
                  param: new { Cpf = cpf })
                 .FirstOrDefault();
 
-        public void Save(Customer model, int id)
+        public void Save(Customer model, Guid? id)
         {
-            if (id > 0) //Update
+            if (id.HasValue) //Update
             {
                 _context.Connection.ExecuteScalar(
                     "UPDATE Cliente SET Nome = @Nome, Documento = @Documento, Email = @Email, Telefone = @Telefone Where Id = @Id",
-                    param: new { Id = id, Nome = model.Name, Documento = model.Cpf.Number, Email = model.Email.Address, Telefone = model.Telefone }
+                    param: new { Id = id.Value.ToString().ToUpper(), Nome = model.Name.ToString(), Documento = model.Cpf.Number, Email = model.Email.Address, Telefone = model.Telefone }
                 );
             }
             else //insert

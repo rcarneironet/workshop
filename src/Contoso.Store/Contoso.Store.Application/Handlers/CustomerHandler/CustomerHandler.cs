@@ -11,7 +11,8 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
 {
     public class CustomerHandler :
         Notifiable,
-        ICommandHandler<CreateCustomerCommand>
+        ICommandHandler<CreateCustomerCommand>,
+        ICommandHandler<ChangeCustomerCommand>
     {
         private readonly ICustomerRepository _repository;
         public CustomerHandler(ICustomerRepository repository)
@@ -41,7 +42,7 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
 
             try
             {
-                _repository.Save(customer, 0);
+                _repository.Save(customer, null);
             }
             catch (Exception ex)
             {
@@ -51,5 +52,40 @@ namespace Contoso.Store.Application.Handlers.CustomerHandler
 
             return new CommandResult(true, "Customer criado com sucesso", null);
         }
+
+        public ICommandResult Handle(ChangeCustomerCommand command)
+        {
+            //Criar ValueObjects
+            var name = new NameVo(command.Nome, command.Sobrenome);
+            var cpf = new CpfVo(command.Documento);
+            var email = new Email(command.Email);
+            //Criar
+            var customer = new Customer(name, cpf, email, command.Telefone);
+
+            //Validar
+            AddNotifications(name.Notifications);
+            AddNotifications(cpf.Notifications);
+            AddNotifications(email.Notifications);
+
+            if (Invalid)
+            {
+                return new CommandResult(false,
+                    "Erro, corrija os seguintes problemas:",
+                    Notifications);
+            }
+
+            try
+            {
+                _repository.Save(customer, command.Id);
+            }
+            catch (Exception ex)
+            {
+                //TO-DO: implementar log real
+                throw new Exception("Erro - Handler CustomerHandler" + ex.Message);
+            }
+
+            return new CommandResult(true, "Customer criado com sucesso", null);
+        }
+
     }
 }

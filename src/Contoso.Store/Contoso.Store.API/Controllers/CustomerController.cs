@@ -1,6 +1,5 @@
 ﻿using Contoso.Store.Application.Handlers.CustomerHandler;
 using Contoso.Store.Domain.Contexts.Commands.Customer;
-using Contoso.Store.Shared.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Contoso.Store.API.Controllers
@@ -15,13 +14,31 @@ namespace Contoso.Store.API.Controllers
             _handler = handler;
         }
 
-        [HttpPost("criar")]
-        [ProducesResponseType(typeof(string), 200)] //OK
-        [ProducesResponseType(400)] //bad request
-        [ProducesResponseType(500)] //server error
-        public ICommandResult Post([FromBody] CreateCustomerCommand command)
+        [HttpPost("create")]
+        [ProducesResponseType(typeof(string), 201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult Post([FromBody] CreateCustomerCommand command)
         {
-            return _handler.Handle(command);
+            return StatusCode(201, _handler.Handle(command));
+        }
+
+        [HttpPut("update")]
+        [ProducesResponseType(typeof(string), 204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult Put([FromBody] ChangeCustomerCommand command)
+        {
+            return StatusCode(204, _handler.Handle(command));
+        }
+
+        [HttpGet("getall")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult Get()
+        {
+            return StatusCode(200);
         }
     }
 }
