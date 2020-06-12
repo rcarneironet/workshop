@@ -1,5 +1,5 @@
 ﻿using Contoso.Store.Domain.Contexts.Enums;
-using Contoso.Store.Shared.BaseEntity;
+using Contoso.Store.Domain.BaseEntity;
 using System;
 
 namespace Contoso.Store.Domain.Contexts.Entities

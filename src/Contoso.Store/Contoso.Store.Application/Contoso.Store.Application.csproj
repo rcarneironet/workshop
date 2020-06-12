@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contoso.Store.Domain\Contoso.Store.Domain.csproj" />
+    <ProjectReference Include="..\Contoso.Store.Shared\Contoso.Store.Shared.csproj" />
   </ItemGroup>
 
 </Project>

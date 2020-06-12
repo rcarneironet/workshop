@@ -1,4 +1,4 @@
-﻿using Contoso.Store.Shared.BaseEntity;
+﻿using Contoso.Store.Domain.BaseEntity;
 
 namespace Contoso.Store.Domain.Contexts.Entities
 {

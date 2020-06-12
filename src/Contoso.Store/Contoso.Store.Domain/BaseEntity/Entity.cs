@@ -1,7 +1,7 @@
 ﻿using FluentValidator;
 using System;
 
-namespace Contoso.Store.Shared.BaseEntity
+namespace Contoso.Store.Domain.BaseEntity
 {
     public abstract class Entity : Notifiable
     {
