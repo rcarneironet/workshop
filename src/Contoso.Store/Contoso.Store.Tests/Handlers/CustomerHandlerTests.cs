@@ -17,15 +17,10 @@ namespace Contoso.Store.Tests.Handlers
         public void CustomerHandlerTests_CreateCustomer_Should_Be_Valid()
         {
             var command = new CreateCustomerCommand();
-
-            var name = new NameVo("Ray", "Carneiro");
-            var cpf = new CpfVo("72092578022");
-            var email = new Email("contato@academiadotnet.com.br");
-
-            command.Nome = name.FirstName;
-            command.Sobrenome = name.LastName;
-            command.Documento = cpf;
-            command.Email = email;
+            command.Nome = "Ray";
+            command.Sobrenome = "Carneiro";
+            command.Documento = "72092578022";
+            command.Email = "contato@academiadotnet.com.br";
             command.Telefone = "";
 
             var handler = new CustomerCommandHandler(new FakeCustomerRepositoryTests());
@@ -37,15 +32,10 @@ namespace Contoso.Store.Tests.Handlers
         public void CustomerHandlerTests_CreateCustomer_Should_Create_Successfully()
         {
             var command = new CreateCustomerCommand();
-
-            var name = new NameVo("Ray", "Carneiro");
-            var cpf = new CpfVo("72092578022");
-            var email = new Email("contato@academiadotnet.com.br");
-
-            command.Nome = name.FirstName;
-            command.Sobrenome = name.LastName;
-            command.Documento = cpf;
-            command.Email = email;
+            command.Nome = "Ray";
+            command.Sobrenome = "Carneiro";
+            command.Documento = "72092578022";
+            command.Email = "contato@academiadotnet.com.br";
             command.Telefone = "";
 
             var handler = new CustomerCommandHandler(new FakeCustomerRepositoryTests());
