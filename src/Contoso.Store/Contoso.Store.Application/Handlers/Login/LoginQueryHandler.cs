@@ -59,7 +59,15 @@ namespace Contoso.Store.Application.Handlers.Login
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
-            return new ApiContract(true, string.Empty, tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor)));
+            var data = new
+            {
+                authenticated = true,
+                created = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"),
+                expiration = tokenDescriptor.Expires.Value.ToString("yyyy-MM-dd HH:mm:ss"),
+                accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor))
+            };
+
+            return new ApiContract(true, "Token gerado com sucesso", data);
         }
     }
 }
