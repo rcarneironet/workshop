@@ -4,6 +4,13 @@ using Contoso.Store.Shared.Implementations;
 using Contoso.Store.Shared.Security;
 using FluentValidator;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Contoso.Store.Application.Handlers.Login
 {
@@ -12,9 +19,14 @@ namespace Contoso.Store.Application.Handlers.Login
         IQueryHandler<LoginQuery>
     {
         private readonly SigningConfigurations _signingConfigurations;
-        public LoginQueryHandler([FromServices] SigningConfigurations signingConfigurations)
+        private readonly JwtSettings _jwtSettings;
+
+        public LoginQueryHandler(
+            [FromServices] SigningConfigurations signingConfigurations,
+            IOptions<JwtSettings> jwtSettings)
         {
             _signingConfigurations = signingConfigurations;
+            _jwtSettings = jwtSettings.Value;
         }
 
         public IResult Handle(LoginQuery query)
@@ -29,58 +41,25 @@ namespace Contoso.Store.Application.Handlers.Login
                     Notifications);
             }
 
-            //to-do: implementar sua lógica de busca aqui e enviar para o token criar
-            //substituir o guid e login, se for o caso da sua lógica
-            //var token = GenerateToken(Guid.NewGuid(), "login", query.User, query.Password);
+            var claims = new List<Claim>();
 
-            return new ApiContract(true, string.Empty, string.Empty);
+            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, query.User));
+
+            var identityClaims = new ClaimsIdentity();
+            identityClaims.AddClaims(claims);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = identityClaims,
+                Issuer = _jwtSettings.Issuer,
+                Audience = _jwtSettings.ValidAt,
+                Expires = DateTime.UtcNow.AddHours(_jwtSettings.Expiration),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            return new ApiContract(true, string.Empty, tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor)));
         }
-        //private object GenerateToken(Guid userId, string login, string userName, string email)
-        //{
-
-        //    //TO-DO: Autenticar usuario, aqui estamos apenas retornando true
-        //    var userExists = true;
-
-        //    if (userExists)
-        //    {
-        //        var identity = new ClaimsIdentity(
-        //            new GenericIdentity(login, "Login"),
-        //            new[] {
-        //                new Claim(JwtRegisteredClaimNames.Jti, userId.ToString()),
-        //                new Claim("Email", email),
-        //                new Claim("NameUser", userName)
-        //            });
-
-        //        var dateCreated = DateTime.Now;
-        //        var dateExpiration = dateCreated.AddDays(1);
-
-        //        var handler = new JwtSecurityTokenHandler();
-        //        var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-        //        {
-        //            Issuer = tokenIssuer,
-        //            Audience = tokenAudience,
-        //            SigningCredentials = _signingConfigurations.SigningCredentials,
-        //            Subject = identity,
-        //            NotBefore = dateCreated,
-        //            Expires = dateExpiration
-        //        });
-
-        //        return new
-        //        {
-        //            authenticated = true,
-        //            created = dateCreated.ToString("yyyy-MM-dd HH:mm:ss"),
-        //            expiration = dateExpiration.ToString("yyyy-MM-dd HH:mm:ss"),
-        //            accessToken = handler.WriteToken(securityToken),
-        //            message = "OK"
-        //        };
-        //    }
-
-        //    return new
-        //    {
-        //        authenticated = false,
-        //        message = "User does not exists!"
-        //    };
-        //}
-
     }
 }

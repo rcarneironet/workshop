@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Contoso.Store.Shared.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +13,9 @@ namespace Contoso.Store.API.Configurations
         public static void AddJwtSetup(this IServiceCollection services, IConfiguration configuration)
         {
             var appSettingsSection = configuration.GetSection("ApiSettings");
-            services.Configure<ApiSettings>(appSettingsSection);
+            services.Configure<JwtSettings>(appSettingsSection);
 
-            var appSettings = appSettingsSection.Get<ApiSettings>();
+            var appSettings = appSettingsSection.Get<JwtSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(x =>

@@ -1,6 +1,6 @@
-﻿namespace Contoso.Store.API.Configurations
+﻿namespace Contoso.Store.Shared.Security
 {
-    public class ApiSettings
+    public class JwtSettings
     {
         public string Secret { get; set; }
         public int Expiration { get; set; }
