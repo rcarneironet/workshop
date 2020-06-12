@@ -1,4 +1,5 @@
 ﻿using Contoso.Store.Infrastructure.IoC.Application;
+using Contoso.Store.Infrastructure.IoC.Infrastructure;
 using Contoso.Store.Infrastructure.IoC.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,9 @@ namespace Contoso.Store.Infrastructure.IoC
 
             //Servicos de Repositorio
             new RepositoryBootstrapper().ChildServiceRegister(services);
+
+            //Infra
+            new InfrastructureBootstrapper().ChildServiceRegister(services);
         }
     }
 }
