@@ -5,9 +5,9 @@ using System;
 
 namespace Contoso.Store.API.Configurations
 {
-    public static class ApiConfig
+    public static class SwaggerConfig
     {
-        public static void ConfigurateSwaggerSetup(IServiceCollection services)
+        public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -20,7 +20,7 @@ namespace Contoso.Store.API.Configurations
                 }));
         }
 
-        public static void UseSwaggerSetup(IApplicationBuilder app)
+        public static void UseSwaggerSetup(this IApplicationBuilder app)
         {
             if (app == null) throw new ArgumentNullException(nameof(app));
 
