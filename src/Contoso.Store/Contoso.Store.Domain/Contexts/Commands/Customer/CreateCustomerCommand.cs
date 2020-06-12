@@ -1,4 +1,4 @@
-﻿using Contoso.Store.Shared.Abstractions;
+﻿using Contoso.Store.Domain.Abstractions;
 using FluentValidator;
 using FluentValidator.Validation;
 using System;

@@ -1,4 +1,4 @@
-﻿namespace Contoso.Store.Shared.Abstractions
+﻿namespace Contoso.Store.Domain.Abstractions
 {
     public interface ICommand
     {

@@ -1,6 +1,6 @@
 ﻿using Contoso.Store.Domain.Contexts.Queries.Security;
-using Contoso.Store.Shared.Abstractions;
-using Contoso.Store.Shared.Implementations;
+using Contoso.Store.Domain.Abstractions;
+using Contoso.Store.Domain.Implementations;
 using Contoso.Store.Shared.Security;
 using FluentValidator;
 using Microsoft.AspNetCore.Mvc;

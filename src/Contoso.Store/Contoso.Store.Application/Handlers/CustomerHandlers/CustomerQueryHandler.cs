@@ -1,8 +1,8 @@
 ﻿using Contoso.Store.Application.Repositories.Dapper.Repositories;
 using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
 using Contoso.Store.Domain.Contexts.ValueObjects;
-using Contoso.Store.Shared.Abstractions;
-using Contoso.Store.Shared.Implementations;
+using Contoso.Store.Domain.Abstractions;
+using Contoso.Store.Domain.Implementations;
 using FluentValidator;
 using System;
 

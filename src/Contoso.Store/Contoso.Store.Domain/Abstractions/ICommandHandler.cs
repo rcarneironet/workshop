@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contoso.Store.Shared.Abstractions
+namespace Contoso.Store.Domain.Abstractions
 {
     public interface ICommandHandler<T> where T : ICommand
     {

@@ -1,6 +1,6 @@
-﻿using Contoso.Store.Shared.Abstractions;
+﻿using Contoso.Store.Domain.Abstractions;
 
-namespace Contoso.Store.Shared.Implementations
+namespace Contoso.Store.Domain.Implementations
 {
     public class ApiContract : IResult
     {
@@ -8,8 +8,8 @@ namespace Contoso.Store.Shared.Implementations
         public string Message { get; set; }
         public object Data { get; set; }
         public ApiContract(
-            bool success, 
-            string message, 
+            bool success,
+            string message,
             object data)
         {
             Success = success;

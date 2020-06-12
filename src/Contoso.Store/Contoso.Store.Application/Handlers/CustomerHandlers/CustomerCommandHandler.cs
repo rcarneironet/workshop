@@ -2,8 +2,8 @@
 using Contoso.Store.Domain.Contexts.Commands.Customer;
 using Contoso.Store.Domain.Contexts.Entities;
 using Contoso.Store.Domain.Contexts.ValueObjects;
-using Contoso.Store.Shared.Abstractions;
-using Contoso.Store.Shared.Implementations;
+using Contoso.Store.Domain.Abstractions;
+using Contoso.Store.Domain.Implementations;
 using FluentValidator;
 using System;
 
