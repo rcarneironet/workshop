@@ -1,4 +1,5 @@
-﻿using Contoso.Store.Infrastructure.IoC;
+﻿using Contoso.Store.API.Configurations;
+using Contoso.Store.Infrastructure.IoC;
 using Contoso.Store.Shared.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -26,72 +27,21 @@ namespace Contoso.Store.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddOptions();
-
-            //Cors
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                    builder.SetIsOriginAllowed(_ => true)
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
-            });
-
             //Swagger
-            services.AddSwaggerGen(s => s.SwaggerDoc("v1",
-            new OpenApiInfo
-            {
-                Version = "1.0",
-                Title = "API Workshop Academia",
-                Description = "API do Contoso Store"
-            }));
-
-            // JWT Setup
-            //TO-DO: Change key with a secret and change valid audience
-
-            var signingConfigurations = new SigningConfigurations();
-            services.AddSingleton(signingConfigurations);
-
-            var key = Encoding.ASCII.GetBytes("Trustn01");
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = true;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false, //mude se precisar
-                    ValidateAudience = false, //mude se precisar
-                    ValidAudience = "localhost:5001"
-                };
-            });
-
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-            });
-
-            /*
-             * Transient -> um novo objeto é sempre criado, uma nova instância é sempre provida para cada request/serviço
-             * Scoped -> Um mesmo objeto dentro de um request, mas diferente entre multiplos requests
-             * Singleton (padrão de projeto) -> Os objetos ficam na memoria enquanto o sistema estiver no ar
-             */
-
+            ApiConfig.ConfigurateSwaggerSetup(services);
+            //Services
             RegisterServices(services);
         }
 
         private void RegisterServices(IServiceCollection services)
         {
+            /*
+            * Transient -> um novo objeto é sempre criado, uma nova instância é sempre provida para cada request/serviço
+            * Scoped -> Um mesmo objeto dentro de um request, mas diferente entre multiplos requests
+            * Singleton (padrão de projeto) -> Os objetos ficam na memoria enquanto o sistema estiver no ar
+            */
             new RootBootstrapper().BootStrapperRegisterServices(services);
         }
 
@@ -114,19 +64,12 @@ namespace Contoso.Store.API
                 c.AllowAnyOrigin();
             });
 
-            app.UseAuthorization();
-            //app.UseAuthentication();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contoso API");
-            });
+            ApiConfig.UseSwaggerSetup(app);
         }
     }
 }

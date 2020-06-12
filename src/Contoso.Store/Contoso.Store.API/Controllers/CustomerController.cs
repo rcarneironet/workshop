@@ -1,12 +1,10 @@
 ﻿using Contoso.Store.Application.Handlers.CustomerHandlers;
 using Contoso.Store.Domain.Contexts.Commands.Customer;
 using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Contoso.Store.API.Controllers
 {
-    [Authorize("Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : Controller
