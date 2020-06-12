@@ -23,8 +23,8 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
         {
             //Criar ValueObjects
             var name = new NameVo(command.Nome, command.Sobrenome);
-            var cpf = new CpfVo(command.Documento);
-            var email = new Email(command.Email);
+            var cpf = new CpfVo(command.Documento.Number);
+            var email = new Email(command.Email.Address);
             //Criar
             var customer = new Customer(name, cpf, email, command.Telefone);
 
