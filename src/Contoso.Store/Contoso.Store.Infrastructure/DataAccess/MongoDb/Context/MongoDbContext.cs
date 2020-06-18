@@ -1,4 +1,5 @@
-﻿using Contoso.Store.Domain.Contexts.Entities;
+﻿using Contoso.Store.Domain.Contexts.Dtos;
+using Contoso.Store.Domain.Contexts.Entities;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
@@ -18,7 +19,7 @@ namespace Contoso.Store.Infrastructure.DataAccess.MongoDb.Context
         }
 
         public IMongoCollection<Customer> Customers =>
-            _mongoDatabase.GetCollection<Customer>("Sales");
+            _mongoDatabase.GetCollection<Customer>("Customers");
 
     }
 }

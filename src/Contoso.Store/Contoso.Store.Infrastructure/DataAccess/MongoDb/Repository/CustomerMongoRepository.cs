@@ -1,10 +1,11 @@
 ﻿using Contoso.Store.Application.Repositories.MongoDb;
+using Contoso.Store.Domain.Contexts.Dtos;
 using Contoso.Store.Domain.Contexts.Entities;
 using Contoso.Store.Infrastructure.DataAccess.MongoDb.Context;
-using System;
-using System.Collections.Generic;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace Contoso.Store.Infrastructure.DataAccess.MongoDb.Repository
 {

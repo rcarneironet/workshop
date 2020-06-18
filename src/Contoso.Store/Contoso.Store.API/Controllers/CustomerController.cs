@@ -1,4 +1,5 @@
-﻿using Contoso.Store.Application.Handlers.CustomerHandlers;
+﻿using System.Threading.Tasks;
+using Contoso.Store.Application.Handlers.CustomerHandlers;
 using Contoso.Store.Domain.Contexts.Commands.Customer;
 using Contoso.Store.Domain.Contexts.Enums;
 using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
@@ -66,9 +67,9 @@ namespace Contoso.Store.API.Controllers
          ProducesResponseType(400),
          ProducesResponseType(401),
          ProducesResponseType(500)]
-        public IActionResult GetAsync()
+        public async Task<IActionResult> GetAsync()
         {
-            return StatusCode(200, _queryHandler.HandleAsync());
+            return StatusCode(200, await _queryHandler.HandleAsync());
         }
 
         [HttpGet("getAllCustomerFromMongoDb"),
@@ -76,6 +77,7 @@ namespace Contoso.Store.API.Controllers
          ProducesResponseType(400),
          ProducesResponseType(401),
          ProducesResponseType(500)]
+        //[ResponseCache(Duration = 600)]
         public IActionResult GetAllCustomers()
         {
             return StatusCode(200, _queryHandler.Handle(EDataSourceType.MongoDb));

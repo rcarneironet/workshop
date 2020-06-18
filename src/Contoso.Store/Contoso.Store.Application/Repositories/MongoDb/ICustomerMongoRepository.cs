@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Contoso.Store.Domain.Contexts.Dtos;
 using Contoso.Store.Domain.Contexts.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Contoso.Store.Application.Repositories.MongoDb
 {

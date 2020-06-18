@@ -56,11 +56,10 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
             try
             {
                 //to-do: achar uma forma melhor de passar o parametro
-                if (source == EDataSourceType.MongoDb)
-                    return new ApiContract(true, string.Empty, _mongoRepository.GetAll());
 
-                return new ApiContract(true, string.Empty, _repository.AllCustomersQuery());
-
+                return source == EDataSourceType.MongoDb ?
+                    new ApiContract(true, string.Empty, _mongoRepository.GetAll())
+                    : new ApiContract(true, string.Empty, _repository.AllCustomersQuery());
             }
             catch (Exception ex)
             {
@@ -70,7 +69,11 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
 
         public async Task<IResult> HandleAsync()
         {
-            var data = await _repositoryAsync.AllCustomersQuery();
+            var data =
+                await _repositoryAsync
+                    .AllCustomersQuery()
+                    .ConfigureAwait(false);
+
             return new ApiContract(true, string.Empty, data);
         }
     }
