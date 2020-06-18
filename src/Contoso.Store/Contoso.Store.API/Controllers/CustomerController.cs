@@ -1,5 +1,6 @@
 ﻿using Contoso.Store.Application.Handlers.CustomerHandlers;
 using Contoso.Store.Domain.Contexts.Commands.Customer;
+using Contoso.Store.Domain.Contexts.Enums;
 using Contoso.Store.Domain.Contexts.Queries.CustomerQueries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +58,27 @@ namespace Contoso.Store.API.Controllers
          ProducesResponseType(500)]
         public IActionResult Get()
         {
-            return StatusCode(200, _queryHandler.Handle());
+            return StatusCode(200, _queryHandler.Handle(EDataSourceType.SqlServer));
+        }
+
+        [HttpGet("getAllCustomersAsync"),
+         ProducesResponseType(typeof(string), 200),
+         ProducesResponseType(400),
+         ProducesResponseType(401),
+         ProducesResponseType(500)]
+        public IActionResult GetAsync()
+        {
+            return StatusCode(200, _queryHandler.HandleAsync());
+        }
+
+        [HttpGet("getAllCustomerFromMongoDb"),
+         ProducesResponseType(typeof(string), 200),
+         ProducesResponseType(400),
+         ProducesResponseType(401),
+         ProducesResponseType(500)]
+        public IActionResult GetAllCustomers()
+        {
+            return StatusCode(200, _queryHandler.Handle(EDataSourceType.MongoDb));
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Contoso.Store.Infrastructure.IoC.Repository
         {
             services.AddScoped<DapperContext, DapperContext>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerAsyncRepository, CustomerAsyncRepository>();
         }
     }
 

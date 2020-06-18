@@ -49,6 +49,8 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
             {
                 _repository.Save(customer, null);
 
+                //to-do: implementar EventSourcing para incluir no Mongo após confirmação de comando com sucesso
+
                 _mongoRepository.Add(customer);
             }
             catch (Exception ex)
