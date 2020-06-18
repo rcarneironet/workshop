@@ -9,15 +9,11 @@ namespace Contoso.Store.Infrastructure.IoC
     {
         public void BootStrapperRegisterServices(IServiceCollection services)
         {
-            //Servicos de Application            
             new ApplicationBootstrapper().ChildServiceRegister(services);
-            
-            //Servicos de Domain
 
-            //Servicos de Repositorio
             new RepositoryBootstrapper().ChildServiceRegister(services);
+            new MongoDbRepositoryBootstrapper().ChildServiceRegister(services);
 
-            //Infra
             new InfrastructureBootstrapper().ChildServiceRegister(services);
         }
     }

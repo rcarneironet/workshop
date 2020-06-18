@@ -6,6 +6,7 @@ using Contoso.Store.Domain.Abstractions;
 using Contoso.Store.Domain.Implementations;
 using FluentValidator;
 using System;
+using Contoso.Store.Application.Repositories.MongoDb;
 
 namespace Contoso.Store.Application.Handlers.CustomerHandlers
 {
@@ -15,8 +16,12 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
         ICommandHandler<ChangeCustomerCommand>
     {
         private readonly ICustomerRepository _repository;
-        public CustomerCommandHandler(ICustomerRepository repository)
+        private readonly ICustomerMongoRepository _mongoRepository;
+        public CustomerCommandHandler(
+            ICustomerRepository repository,
+            ICustomerMongoRepository mongoRepository)
         {
+            _mongoRepository = mongoRepository;
             _repository = repository;
         }
         public IResult Handle(CreateCustomerCommand command)
@@ -43,6 +48,8 @@ namespace Contoso.Store.Application.Handlers.CustomerHandlers
             try
             {
                 _repository.Save(customer, null);
+
+                _mongoRepository.Add(customer);
             }
             catch (Exception ex)
             {

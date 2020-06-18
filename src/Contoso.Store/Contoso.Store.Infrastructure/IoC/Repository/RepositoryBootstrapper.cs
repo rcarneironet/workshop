@@ -1,6 +1,9 @@
 ﻿using Contoso.Store.Application.Repositories.Dapper.Repositories;
+using Contoso.Store.Application.Repositories.MongoDb;
 using Contoso.Store.Infrastructure.DataAccess.Dapper.Context;
 using Contoso.Store.Infrastructure.DataAccess.Dapper.Repositories;
+using Contoso.Store.Infrastructure.DataAccess.MongoDb.Context;
+using Contoso.Store.Infrastructure.DataAccess.MongoDb.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contoso.Store.Infrastructure.IoC.Repository
@@ -11,6 +14,15 @@ namespace Contoso.Store.Infrastructure.IoC.Repository
         {
             services.AddScoped<DapperContext, DapperContext>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+        }
+    }
+
+    internal class MongoDbRepositoryBootstrapper
+    {
+        internal void ChildServiceRegister(IServiceCollection services)
+        {
+            services.AddScoped<MongoDbContext, MongoDbContext>();
+            services.AddScoped<ICustomerMongoRepository, CustomerMongoRepository>();
         }
     }
 }

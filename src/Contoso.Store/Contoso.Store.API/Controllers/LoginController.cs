@@ -15,10 +15,10 @@ namespace Contoso.Store.API.Controllers
             _queryHandler = queryHandler;
         }
 
-        [HttpPost("token")]
-        [ProducesResponseType(typeof(string), 201)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
+        [HttpPost("token"), 
+         ProducesResponseType(typeof(string), 201), 
+         ProducesResponseType(400),
+         ProducesResponseType(500)]
         public IActionResult Post([FromBody] LoginQuery query)
         {
             return StatusCode(201, _queryHandler.Handle(query));

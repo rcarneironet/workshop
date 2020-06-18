@@ -23,7 +23,9 @@ namespace Contoso.Store.Tests.Handlers
             command.Email = "contato@academiadotnet.com.br";
             command.Telefone = "";
 
-            var handler = new CustomerCommandHandler(new FakeCustomerRepositoryTests());
+            var handler = new CustomerCommandHandler(
+                new FakeCustomerRepositoryTests(),
+                new FakeMongoCustomerRepositoryTests());
 
             Assert.AreEqual(true, handler.IsValid);
         }
@@ -38,7 +40,9 @@ namespace Contoso.Store.Tests.Handlers
             command.Email = "contato@academiadotnet.com.br";
             command.Telefone = "";
 
-            var handler = new CustomerCommandHandler(new FakeCustomerRepositoryTests());
+            var handler = new CustomerCommandHandler(
+                new FakeCustomerRepositoryTests(),
+                new FakeMongoCustomerRepositoryTests());
             var result = handler.Handle(command);
 
             Assert.AreNotEqual(null, result);
